@@ -3,11 +3,13 @@ Has some Kotlin Domain Specific Language code that demonstrates different ways t
 
 There are many sample DSLs in this repository that demonstrate different DSL techniques.
 
-#Builder
+# Builder
 
+```
 here is the builder code
+```
 
-#Lambda
+# Lambda
 
 here is the lambda code reference
 
