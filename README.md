@@ -4,6 +4,7 @@ Has some Kotlin Domain Specific Language code that demonstrates different ways t
 There are many sample DSLs in this repository that demonstrate different DSL techniques.
 
 # Builder
+Chain a bunch of function calls together to have dsl sentences.
 
 ```
       fun build() {
@@ -58,7 +59,7 @@ There are many sample DSLs in this repository that demonstrate different DSL tec
 ```
 
 # builders with Context
-
+the dsl stores state in order to make function chains simpler
 ```
 fun build() {
         val builder = CastleBuilder()
@@ -83,6 +84,7 @@ fun build() {
 ```
 
 # Nested Builders
+The dsl returns different builders to help create complex sentences
 
 ```
  fun build() {
@@ -117,7 +119,7 @@ fun build() {
 ```
 
 # Lambda and Setting Properties
-
+The DSL uses lambdas to restrict the language and different ways of setting properties
 ```
     fun buildFourWallCastle() {
 
@@ -156,6 +158,8 @@ fun build() {
 ```
 
 # Infix notation
+The DSL removes all syntactic noise and uses all infix notation. It also uses the blank object technique
+to make compount clauses such as "has capacity" and "with drawbridge to"
 
 ```
 fun build() {
