@@ -87,8 +87,6 @@ class CastleBuilder {
 
     var moatDepth = 0
 
-    private var buildings = mutableListOf<String>()
-
     operator fun invoke(initializer: CastleBuilder.() -> Unit) {
         initializer()
     }
@@ -121,7 +119,7 @@ class CastleBuilder {
         val symbols = StringSymbolTable<Connectable>()
         allTowers.forEach { symbols.add(it.name, it) }
         var keepBuild: Keep? = null
-        keep?.let {
+        keep.let {
             keepBuild = it.build()
             symbols.add(it.name, keepBuild)
         }
@@ -207,17 +205,6 @@ class KeepBuilder(private val castleBuilder: CastleBuilder,
         buildings.add(hall)
     }
 
-
-    fun tower(to: String): KeepBuilder {
-        castleBuilder.connect(name, to)
-        return this
-    }
-
-    fun to(to: String) : KeepBuilder {
-        castleBuilder.connect(name, to)
-        return this
-    }
-
     fun build() : Keep {
         val keepBuildings = buildings.map { it.build() }
         return Keep(name, keepBuildings)
@@ -244,7 +231,7 @@ class HallBuilder(val name: String = "",
             return true
         }
     override fun build(): KeepBuilding {
-        return Hall(hasFireplace)
+        return Hall(hasFireplace, capacity)
     }
 }
 
@@ -272,7 +259,7 @@ data class Castle(var keep: Keep?, var towers: List<Tower>, var walls: List<Wall
 }
 data class Keep(override var name: String = "keep", var buildings: List<KeepBuilding>): Connectable
 interface KeepBuilding
-data class Hall(var fireplace: Boolean) : KeepBuilding
+data class Hall(var fireplace: Boolean, val capacity: Int) : KeepBuilding
 data class Named(var name: String) : KeepBuilding
 data class Tower(override var name:String, var hasCatapult: Boolean): Connectable
 data class Wall(var from: Connectable, var to: Connectable, var drawBridge: DrawBridge?)

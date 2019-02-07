@@ -1,6 +1,7 @@
 package dsl.castlebuilder.builder
 
 import dsl.castlebuilder.model.Connectable
+import dsl.castlebuilder.model.StringSymbolTable
 
 fun main(args : Array<String>) {
     CastleDsl().build()
@@ -103,31 +104,6 @@ class CastleBuilder {
             Wall(symbols.lookup(from), symbols.lookup(to)) }
         return Castle(keep, towers, allWalls)
     }
-
-}
-
-/**
- * tracks symbols named by strings
- */
-class StringSymbolTable<T> {
-    var map = mutableMapOf<String, T>()
-    // map by types
-    fun lookup(symbol: String): T {
-        map[symbol]?.let {
-            return it
-        } ?: throw CastleSymbolNotRecognizedException(
-                   "Cannot find a symbol ${symbol}")
-    }
-
-    fun add(key: String, value: T?) {
-        value?.let {
-            map[key] = it
-        }
-    }
-}
-
-class CastleSymbolNotRecognizedException(
-        message: String) : Exception(message) {
 }
 
 data class Castle(var keep: Keep?, var towers: List<Tower>, var walls: List<Wall>)

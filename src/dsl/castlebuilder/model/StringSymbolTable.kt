@@ -19,5 +19,4 @@ class StringSymbolTable<T> {
     }
 }
 
-class CastleSymbolNotRecognizedException(message: String) : Exception(message) {
-}
+class CastleSymbolNotRecognizedException(message: String) : Exception(message)
